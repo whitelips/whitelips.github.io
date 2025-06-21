@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,20 +41,130 @@
         .project-link:hover {
             background: #0550ae;
         }
+        .lang-content {
+            display: none;
+        }
+        .lang-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Whitelips</h1>
-        <p>Welcome to my collection of web projects and tools.</p>
-    </header>
+    <div class="lang-content" data-lang="en">
+        <header>
+            <h1>Whitelips</h1>
+            <p>Welcome to my collection of web projects and tools.</p>
+        </header>
 
-    <main>
-        <div class="project-card">
-            <h2>E-ink Wallpaper Generator</h2>
-            <p>A web-based tool for generating optimized wallpapers specifically designed for e-ink displays. Create beautiful, high-contrast images that look great on e-reader screens and e-ink monitors.</p>
-            <a href="https://whitelips.github.io/eink-wallpaper-generator/" class="project-link">Launch Generator</a>
-        </div>
-    </main>
+        <main>
+            <div class="project-card">
+                <h2>E-ink Wallpaper Generator</h2>
+                <p>A web-based tool for generating optimized wallpapers specifically designed for e-ink displays. Create beautiful, high-contrast images that look great on e-reader screens and e-ink monitors.</p>
+                <a href="https://whitelips.github.io/eink-wallpaper-generator" class="project-link">Launch Generator</a>
+            </div>
+        </main>
+    </div>
+
+    <div class="lang-content" data-lang="ko">
+        <header>
+            <h1>Whitelips</h1>
+            <p>웹 프로젝트와 도구 모음에 오신 것을 환영합니다.</p>
+        </header>
+
+        <main>
+            <div class="project-card">
+                <h2>E-ink 배경화면 생성기</h2>
+                <p>전자잉크 디스플레이에 최적화된 배경화면을 생성하는 웹 기반 도구입니다. 전자책 리더기와 전자잉크 모니터에서 멋지게 보이는 아름답고 고대비 이미지를 만들어보세요.</p>
+                <a href="https://whitelips.github.io/eink-wallpaper-generator" class="project-link">생성기 시작하기</a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Detect user's language using Intl API
+        function detectLanguage() {
+            try {
+                // Use Intl API to get the actual locale being used
+                const intlLocale = Intl.DateTimeFormat().resolvedOptions().locale;
+                const numberFormatLocale = Intl.NumberFormat().resolvedOptions().locale;
+                const collatorLocale = Intl.Collator().resolvedOptions().locale;
+                
+                console.log('Intl DateTimeFormat locale:', intlLocale);
+                console.log('Intl NumberFormat locale:', numberFormatLocale);
+                console.log('Intl Collator locale:', collatorLocale);
+                
+                // Check Intl locales for Korean
+                const intlLocales = [intlLocale, numberFormatLocale, collatorLocale];
+                for (const locale of intlLocales) {
+                    if (locale && locale.toLowerCase().startsWith('ko')) {
+                        console.log('Korean detected from Intl:', locale);
+                        return 'ko';
+                    }
+                }
+                
+                // Fallback to navigator methods
+                const browserLang = navigator.language || navigator.userLanguage;
+                const languages = navigator.languages || [browserLang];
+                
+                console.log('Navigator language:', browserLang);
+                console.log('Navigator languages:', languages);
+                
+                // Check navigator languages
+                for (const lang of languages) {
+                    if (lang && lang.toLowerCase().startsWith('ko')) {
+                        console.log('Korean detected from Navigator:', lang);
+                        return 'ko';
+                    }
+                }
+                
+                console.log('No Korean locale detected, defaulting to English');
+                return 'en';
+                
+            } catch (error) {
+                console.error('Error detecting language:', error);
+                // Fallback to simple navigator check
+                const browserLang = navigator.language || 'en';
+                console.log('Fallback browser language:', browserLang);
+                return browserLang.toLowerCase().startsWith('ko') ? 'ko' : 'en';
+            }
+        }
+
+        // Show content based on detected language
+        function showLanguageContent() {
+            const detectedLang = detectLanguage();
+            console.log('Final detected language:', detectedLang);
+            
+            const allContent = document.querySelectorAll('.lang-content');
+            console.log('Found content sections:', allContent.length);
+            
+            // Hide all content first
+            allContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show content for detected language
+            const targetContent = document.querySelector(`.lang-content[data-lang="${detectedLang}"]`);
+            console.log('Target content element:', targetContent);
+            
+            if (targetContent) {
+                targetContent.classList.add('active');
+                document.documentElement.lang = detectedLang;
+                console.log('Showing', detectedLang, 'content');
+            } else {
+                // Fallback to English if target language not found
+                const fallback = document.querySelector('.lang-content[data-lang="en"]');
+                if (fallback) {
+                    fallback.classList.add('active');
+                    document.documentElement.lang = 'en';
+                    console.log('Fallback to English content');
+                } else {
+                    console.error('No fallback content found!');
+                }
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', showLanguageContent);
+    </script>
 </body>
 </html>
