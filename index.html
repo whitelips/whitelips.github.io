@@ -12,71 +12,759 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
             line-height: 1.6;
             color: #333;
+            background: #fafbfc;
         }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            margin: -20px -20px 60px -20px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        section {
+            margin: 50px 0;
+        }
+        
+        section h2 {
+            color: #24292f;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e1e5e9;
+            padding-bottom: 10px;
+        }
+        
+        .about-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
         .project-card {
             border: 1px solid #e1e5e9;
-            border-radius: 8px;
-            padding: 24px;
+            border-radius: 12px;
+            padding: 30px;
             margin: 20px 0;
-            background: #f8f9fa;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .project-card h2 {
-            margin-top: 0;
+        
+        .project-card.featured {
+            border: 2px solid #0969da;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .project-header h3 {
+            margin: 0;
             color: #24292f;
+            font-size: 1.5em;
         }
+        
+        .project-status {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .project-description {
+            font-size: 1.1em;
+            color: #586069;
+            margin: 15px 0 25px 0;
+        }
+        
+        .project-features h4,
+        .project-tech h4 {
+            color: #24292f;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .project-features ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .project-features li {
+            margin: 8px 0;
+            color: #586069;
+        }
+        
+        .project-tech p {
+            color: #586069;
+            font-style: italic;
+        }
+        
+        .project-links {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
         .project-link {
             display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-align: center;
+            min-width: 120px;
+        }
+        
+        .project-link.primary {
             background: #0969da;
             color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 6px;
+        }
+        
+        .project-link.primary:hover {
+            background: #0550ae;
+            transform: translateY(-1px);
+        }
+        
+        .project-link.secondary {
+            background: #f6f8fa;
+            color: #24292f;
+            border: 1px solid #d1d9e0;
+        }
+        
+        .project-link.secondary:hover {
+            background: #f1f3f4;
+            border-color: #c4c9d0;
+        }
+        
+        .devices-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .device-brand {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e1e5e9;
+        }
+        
+        .device-brand h4 {
+            margin: 0 0 8px 0;
+            color: #24292f;
+            font-size: 1.1em;
+        }
+        
+        .device-brand p {
+            margin: 0;
+            color: #586069;
+            font-size: 0.9em;
+        }
+        
+        .future-projects {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e1e5e9;
+        }
+        
+        .future-projects ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .future-projects li {
+            margin: 10px 0;
+            color: #495057;
             font-weight: 500;
         }
-        .project-link:hover {
-            background: #0550ae;
+        
+        /* Tutorial Section Styles */
+        .tutorial-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            margin: 50px 0;
         }
+        
+        .tutorial-steps {
+            margin: 30px 0;
+        }
+        
+        .tutorial-step {
+            display: flex;
+            align-items: flex-start;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #0969da;
+        }
+        
+        .step-number {
+            background: #0969da;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h3 {
+            margin: 0 0 10px 0;
+            color: #24292f;
+            font-size: 1.3em;
+        }
+        
+        .step-content p {
+            margin: 10px 0;
+            color: #586069;
+            line-height: 1.6;
+        }
+        
+        .step-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .step-content li {
+            margin: 8px 0;
+            color: #586069;
+        }
+        
+        .tutorial-tips {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e1e5e9;
+        }
+        
+        .tutorial-tips h3 {
+            color: #24292f;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .tip-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tip-card h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.1em;
+            color: white;
+        }
+        
+        .tip-card p {
+            margin: 0;
+            opacity: 0.95;
+            line-height: 1.5;
+        }
+        
         .lang-content {
             display: none;
         }
+        
         .lang-content.active {
             display: block;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            header {
+                margin: -15px -15px 40px -15px;
+                padding: 30px 20px;
+            }
+            
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+            
+            .project-link {
+                text-align: center;
+            }
+            
+            .device-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tutorial-section {
+                padding: 25px 20px;
+            }
+            
+            .tutorial-step {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+                align-self: flex-start;
+            }
+            
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="lang-content" data-lang="en">
         <header>
-            <h1>Whitelips</h1>
-            <p>Welcome to my collection of web projects and tools.</p>
+            <h1>WhiteLips</h1>
+            <p>Innovative tools for niche technology enthusiasts</p>
         </header>
 
         <main>
-            <div class="project-card">
-                <h2>E-ink Wallpaper Generator</h2>
-                <p>A web-based tool for generating optimized wallpapers specifically designed for e-ink displays. Create beautiful, high-contrast images that look great on e-reader screens and e-ink monitors.</p>
-                <a href="https://whitelips.github.io/eink-wallpaper-generator" class="project-link">Launch Generator</a>
-            </div>
+            <!-- About Section -->
+            <section class="about-section">
+                <h2>About WhiteLips</h2>
+                <p>WhiteLips is dedicated to creating specialized tools and services for niche technology markets. We focus on underserved communities like e-ink device users, providing innovative solutions that enhance their digital experience.</p>
+                <p>Our mission is to bridge the gap between emerging technologies and practical applications, starting with the growing e-ink ecosystem. From e-readers to e-ink monitors, we develop tools that unlock the full potential of these unique displays.</p>
+            </section>
+
+            <!-- Featured Project -->
+            <section class="featured-project">
+                <h2>Featured Project</h2>
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <h3>E-ink Wallpaper Generator</h3>
+                        <span class="project-status">Live</span>
+                    </div>
+                    
+                    <p class="project-description">A comprehensive web-based tool for creating Apple Music-style lockscreens optimized specifically for e-ink displays. Generate personalized music player wallpapers for your e-reader or e-ink device.</p>
+                    
+                    <div class="project-features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li><strong>25+ Device Presets:</strong> Support for Onyx Boox, reMarkable, Kindle, Kobo, Supernote, and more</li>
+                            <li><strong>E-ink Optimization:</strong> Grayscale conversion, Floyd-Steinberg dithering, contrast adjustment</li>
+                            <li><strong>Real-time Preview:</strong> See your wallpaper design instantly as you customize</li>
+                            <li><strong>Custom Album Art:</strong> Upload your own images with automatic rounded corners</li>
+                            <li><strong>Multilingual Interface:</strong> Available in English and Korean</li>
+                            <li><strong>Free Download:</strong> Export high-quality PNG files ready for your device</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-tech">
+                        <h4>Technical Highlights</h4>
+                        <p>Built with vanilla JavaScript and HTML5 Canvas API for optimal performance. Features automatic browser language detection, client-side image processing, and responsive design for all screen sizes.</p>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://whitelips.github.io/eink-wallpaper-generator" class="project-link primary">Launch Tool</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Supported Devices -->
+            <section class="devices-section">
+                <h2>Supported E-ink Devices</h2>
+                <p>Our tools are designed to work seamlessly with a wide range of e-ink devices:</p>
+                <div class="device-grid">
+                    <div class="device-brand">
+                        <h4>Onyx Boox</h4>
+                        <p>Note series, Max series, Nova series</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>reMarkable</h4>
+                        <p>reMarkable 1 & 2</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Amazon Kindle</h4>
+                        <p>Paperwhite, Oasis, Scribe</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Kobo</h4>
+                        <p>Clara, Libra, Sage, Elipsa</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Supernote</h4>
+                        <p>A5 X, A6 X series</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Others</h4>
+                        <p>Hisense, PocketBook, Crema, and more</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tutorial Section -->
+            <section class="tutorial-section">
+                <h2>How to Use the E-ink Wallpaper Generator</h2>
+                <p>Create stunning, optimized music player wallpapers for your e-ink device with our step-by-step guide.</p>
+                
+                <div class="tutorial-steps">
+                    <div class="tutorial-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Select Your Device</h3>
+                            <p>Choose your e-ink device from our extensive list of presets. We support over 25 popular models including:</p>
+                            <ul>
+                                <li><strong>Onyx Boox:</strong> Note Air, Max Lumi, Nova series</li>
+                                <li><strong>reMarkable:</strong> reMarkable 1 & 2</li>
+                                <li><strong>Kindle:</strong> Paperwhite, Oasis, Scribe</li>
+                                <li><strong>Kobo:</strong> Clara, Libra, Sage, Elipsa</li>
+                                <li><strong>Custom dimensions:</strong> Enter your device's exact resolution</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Upload Album Artwork</h3>
+                            <p>Click the "Choose File" button to upload your album cover. The tool supports:</p>
+                            <ul>
+                                <li>JPG, PNG, and WebP formats</li>
+                                <li>Automatic resizing and cropping</li>
+                                <li>Rounded corners for aesthetic appeal</li>
+                                <li>Grayscale conversion for e-ink optimization</li>
+                            </ul>
+                            <p><strong>Tip:</strong> High-contrast images work best on e-ink displays. Avoid photos with subtle color gradients.</p>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Enter Music Information</h3>
+                            <p>Fill in the details to create an authentic music player interface:</p>
+                            <ul>
+                                <li><strong>Artist Name:</strong> The performing artist or band</li>
+                                <li><strong>Song Title:</strong> The name of the track</li>
+                                <li><strong>Album Name:</strong> (Optional) The album title</li>
+                                <li><strong>Lyrics:</strong> (Optional) Add a favorite line or verse</li>
+                            </ul>
+                            <p><strong>Character Limits:</strong> Keep text concise for better readability on small screens.</p>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Customize Display Settings</h3>
+                            <p>Fine-tune your wallpaper for optimal e-ink display:</p>
+                            <ul>
+                                <li><strong>Contrast Adjustment:</strong> Increase contrast for better visibility</li>
+                                <li><strong>Dithering Options:</strong> Apply Floyd-Steinberg dithering for smoother gradients</li>
+                                <li><strong>Background Style:</strong> Choose between vinyl record or plain background</li>
+                                <li><strong>Progress Bar:</strong> Set the playback position</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Preview and Download</h3>
+                            <p>Review your creation in real-time and make final adjustments:</p>
+                            <ul>
+                                <li><strong>Live Preview:</strong> See changes instantly as you customize</li>
+                                <li><strong>Device Simulation:</strong> Preview how it looks on your specific device</li>
+                                <li><strong>Download PNG:</strong> Get a high-quality image file</li>
+                                <li><strong>Perfect Fit:</strong> Images are automatically sized for your device</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-tips">
+                    <h3>Pro Tips for Best Results</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🎨 Image Selection</h4>
+                            <p>Choose album covers with high contrast and minimal fine details. Bold, graphic designs work better than photographic images on e-ink displays.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>📱 Device Optimization</h4>
+                            <p>Different e-ink devices have varying refresh rates and contrast capabilities. Test your wallpaper on your specific device for best results.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🔧 File Management</h4>
+                            <p>Save your generated wallpapers in a dedicated folder. Some devices may require specific file formats or locations for wallpaper installation.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>⚡ Performance</h4>
+                            <p>Static wallpapers consume less battery than dynamic ones. Our generated images are optimized for minimal power consumption on e-ink devices.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Projects -->
+            <section class="future-projects">
+                <h2>Coming Soon</h2>
+                <p>We're continuously developing new tools for the e-ink community. Stay tuned for upcoming projects including:</p>
+                <ul>
+                    <li>E-ink Reading Dashboard Generator</li>
+                    <li>Note-taking Template Creator</li>
+                    <li>E-ink Display Calibration Tools</li>
+                    <li>Custom Widget Builder for E-ink Devices</li>
+                </ul>
+            </section>
         </main>
     </div>
 
     <div class="lang-content" data-lang="ko">
         <header>
-            <h1>Whitelips</h1>
-            <p>웹 프로젝트와 도구 모음에 오신 것을 환영합니다.</p>
+            <h1>WhiteLips</h1>
+            <p>틈새 기술 애호가를 위한 혁신적인 도구</p>
         </header>
 
         <main>
-            <div class="project-card">
-                <h2>E-ink 배경화면 생성기</h2>
-                <p>전자잉크 디스플레이에 최적화된 배경화면을 생성하는 웹 기반 도구입니다. 전자책 리더기와 전자잉크 모니터에서 멋지게 보이는 아름답고 고대비 이미지를 만들어보세요.</p>
-                <a href="https://whitelips.github.io/eink-wallpaper-generator" class="project-link">생성기 시작하기</a>
-            </div>
+            <!-- About Section -->
+            <section class="about-section">
+                <h2>WhiteLips 소개</h2>
+                <p>WhiteLips는 틈새 기술 시장을 위한 전문 도구와 서비스를 만드는 데 전념하고 있습니다. 전자잉크 기기 사용자와 같은 소외된 커뮤니티에 집중하여 디지털 경험을 향상시키는 혁신적인 솔루션을 제공합니다.</p>
+                <p>우리의 사명은 신흥 기술과 실용적인 응용 프로그램 사이의 격차를 해소하는 것이며, 성장하는 전자잉크 생태계부터 시작합니다. 전자책 리더기부터 전자잉크 모니터까지, 이러한 독특한 디스플레이의 잠재력을 최대한 활용하는 도구를 개발합니다.</p>
+            </section>
+
+            <!-- Featured Project -->
+            <section class="featured-project">
+                <h2>주요 프로젝트</h2>
+                <div class="project-card featured">
+                    <div class="project-header">
+                        <h3>전자잉크 배경화면 생성기</h3>
+                        <span class="project-status">서비스 중</span>
+                    </div>
+                    
+                    <p class="project-description">전자잉크 디스플레이에 특별히 최적화된 Apple Music 스타일 잠금화면을 만드는 포괄적인 웹 기반 도구입니다. 전자책 리더기나 전자잉크 기기를 위한 개인화된 음악 플레이어 배경화면을 생성하세요.</p>
+                    
+                    <div class="project-features">
+                        <h4>주요 기능</h4>
+                        <ul>
+                            <li><strong>25개 이상 기기 프리셋:</strong> Onyx Boox, reMarkable, Kindle, Kobo, Supernote 등 지원</li>
+                            <li><strong>전자잉크 최적화:</strong> 그레이스케일 변환, Floyd-Steinberg 디더링, 대비 조정</li>
+                            <li><strong>실시간 미리보기:</strong> 사용자 정의하는 동안 배경화면 디자인을 즉시 확인</li>
+                            <li><strong>커스텀 앨범 아트:</strong> 자동 둥근 모서리 처리로 자신만의 이미지 업로드</li>
+                            <li><strong>다국어 인터페이스:</strong> 한국어와 영어 지원</li>
+                            <li><strong>무료 다운로드:</strong> 기기에 바로 사용할 수 있는 고품질 PNG 파일 내보내기</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-tech">
+                        <h4>기술적 특징</h4>
+                        <p>최적의 성능을 위해 바닐라 JavaScript와 HTML5 Canvas API로 제작되었습니다. 자동 브라우저 언어 감지, 클라이언트 측 이미지 처리, 모든 화면 크기를 위한 반응형 디자인을 특징으로 합니다.</p>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://whitelips.github.io/eink-wallpaper-generator" class="project-link primary">도구 시작하기</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Supported Devices -->
+            <section class="devices-section">
+                <h2>지원되는 전자잉크 기기</h2>
+                <p>저희 도구는 다양한 전자잉크 기기와 완벽하게 작동하도록 설계되었습니다:</p>
+                <div class="device-grid">
+                    <div class="device-brand">
+                        <h4>Onyx Boox</h4>
+                        <p>Note 시리즈, Max 시리즈, Nova 시리즈</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>reMarkable</h4>
+                        <p>reMarkable 1 & 2</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Amazon Kindle</h4>
+                        <p>Paperwhite, Oasis, Scribe</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Kobo</h4>
+                        <p>Clara, Libra, Sage, Elipsa</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>Supernote</h4>
+                        <p>A5 X, A6 X 시리즈</p>
+                    </div>
+                    <div class="device-brand">
+                        <h4>기타</h4>
+                        <p>Hisense, PocketBook, Crema 등</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tutorial Section -->
+            <section class="tutorial-section">
+                <h2>전자잉크 배경화면 생성기 사용법</h2>
+                <p>단계별 가이드를 통해 전자잉크 기기를 위한 멋진 최적화된 음악 플레이어 배경화면을 만들어보세요.</p>
+                
+                <div class="tutorial-steps">
+                    <div class="tutorial-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>기기 선택</h3>
+                            <p>다양한 기기 프리셋 목록에서 사용 중인 전자잉크 기기를 선택하세요. 25개 이상의 인기 모델을 지원합니다:</p>
+                            <ul>
+                                <li><strong>Onyx Boox:</strong> Note Air, Max Lumi, Nova 시리즈</li>
+                                <li><strong>reMarkable:</strong> reMarkable 1 & 2</li>
+                                <li><strong>Kindle:</strong> Paperwhite, Oasis, Scribe</li>
+                                <li><strong>Kobo:</strong> Clara, Libra, Sage, Elipsa</li>
+                                <li><strong>사용자 정의 크기:</strong> 기기의 정확한 해상도 입력</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>앨범 아트워크 업로드</h3>
+                            <p>"파일 선택" 버튼을 클릭하여 앨범 커버를 업로드하세요. 다음 기능을 지원합니다:</p>
+                            <ul>
+                                <li>JPG, PNG, WebP 형식 지원</li>
+                                <li>자동 크기 조정 및 자르기</li>
+                                <li>미적 효과를 위한 둥근 모서리</li>
+                                <li>전자잉크 최적화를 위한 그레이스케일 변환</li>
+                            </ul>
+                            <p><strong>팁:</strong> 고대비 이미지가 전자잉크 디스플레이에서 가장 잘 보입니다. 미묘한 색상 그라데이션이 있는 사진은 피하세요.</p>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>음악 정보 입력</h3>
+                            <p>진정한 음악 플레이어 인터페이스를 만들기 위해 세부 정보를 입력하세요:</p>
+                            <ul>
+                                <li><strong>아티스트 이름:</strong> 연주자 또는 밴드</li>
+                                <li><strong>곡 제목:</strong> 트랙의 이름</li>
+                                <li><strong>앨범 이름:</strong> (선택사항) 앨범 제목</li>
+                                <li><strong>가사:</strong> (선택사항) 좋아하는 구절이나 가사 추가</li>
+                            </ul>
+                            <p><strong>글자 수 제한:</strong> 작은 화면에서 가독성을 높이기 위해 텍스트를 간결하게 유지하세요.</p>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>디스플레이 설정 사용자 정의</h3>
+                            <p>최적의 전자잉크 디스플레이를 위해 배경화면을 세밀하게 조정하세요:</p>
+                            <ul>
+                                <li><strong>대비 조정:</strong> 가시성 향상을 위한 대비 증가</li>
+                                <li><strong>디더링 옵션:</strong> 부드러운 그라데이션을 위한 Floyd-Steinberg 디더링 적용</li>
+                                <li><strong>배경 스타일:</strong> 바이닐 레코드 또는 일반 배경 선택</li>
+                                <li><strong>진행률 표시줄:</strong> 재생 위치 설정</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>미리보기 및 다운로드</h3>
+                            <p>실시간으로 작품을 검토하고 최종 조정을 수행하세요:</p>
+                            <ul>
+                                <li><strong>실시간 미리보기:</strong> 사용자 정의하는 동안 변경사항을 즉시 확인</li>
+                                <li><strong>기기 시뮬레이션:</strong> 특정 기기에서 어떻게 보이는지 미리보기</li>
+                                <li><strong>PNG 다운로드:</strong> 고품질 이미지 파일 획득</li>
+                                <li><strong>완벽한 맞춤:</strong> 기기에 맞게 자동으로 크기 조정된 이미지</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutorial-tips">
+                    <h3>최상의 결과를 위한 전문가 팁</h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <h4>🎨 이미지 선택</h4>
+                            <p>고대비와 세부사항이 적은 앨범 커버를 선택하세요. 전자잉크 디스플레이에서는 사진 이미지보다 굵고 그래픽적인 디자인이 더 잘 작동합니다.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>📱 기기 최적화</h4>
+                            <p>전자잉크 기기마다 새로고침 속도와 대비 능력이 다릅니다. 최상의 결과를 위해 특정 기기에서 배경화면을 테스트해보세요.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>🔧 파일 관리</h4>
+                            <p>생성된 배경화면을 전용 폴더에 저장하세요. 일부 기기는 배경화면 설치를 위해 특정 파일 형식이나 위치가 필요할 수 있습니다.</p>
+                        </div>
+                        <div class="tip-card">
+                            <h4>⚡ 성능</h4>
+                            <p>정적 배경화면은 동적 배경화면보다 배터리를 적게 소모합니다. 생성된 이미지는 전자잉크 기기에서 최소한의 전력 소비를 위해 최적화되었습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Future Projects -->
+            <section class="future-projects">
+                <h2>출시 예정</h2>
+                <p>전자잉크 커뮤니티를 위한 새로운 도구를 지속적으로 개발하고 있습니다. 다음 프로젝트들을 기대해 주세요:</p>
+                <ul>
+                    <li>전자잉크 독서 대시보드 생성기</li>
+                    <li>노트 작성 템플릿 생성기</li>
+                    <li>전자잉크 디스플레이 보정 도구</li>
+                    <li>전자잉크 기기용 커스텀 위젯 빌더</li>
+                </ul>
+            </section>
         </main>
     </div>
 
