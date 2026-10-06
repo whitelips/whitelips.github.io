@@ -1,0 +1,24 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "FX6F65BPH7.com.whitelips.fontopia"
+        ],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Fontopia Main App Universal Links"
+          }
+        ]
+      }
+    ]
+  },
+  "appclips": {
+    "apps": [
+      "FX6F65BPH7.com.whitelips.fontopia.appclip",
+      "FX6F65BPH7.com.whitelips.fontopia.Clip"
+    ]
+  }
+}

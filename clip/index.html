@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Fontopia — 아름다운 한국어 서체로 만나는 오늘의 문장</title>
+  
+  <!-- Apple Smart App Banner (iOS Safari App Clip & Full App) -->
+  <meta name="apple-itunes-app" content="app-id=6499271248, app-clip-bundle-id=com.whitelips.fontopia.appclip">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:type" content="website">
+  <meta id="ogTitle" property="og:title" content="Fontopia — 오늘의 문장">
+  <meta id="ogDesc" property="og:description" content="한국의 아름다운 서체로 전하는 오늘의 문장을 감상해보세요.">
+  <meta property="og:site_name" content="Fontopia">
+  
+  <style>
+    :root {
+      --primary: #27AE60;
+      --primary-hover: #219653;
+      --bg: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text-main: #1C1C1E;
+      --text-sub: #636366;
+      --border: rgba(0, 0, 0, 0.08);
+      --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121214;
+        --card-bg: #1C1C1E;
+        --text-main: #F2F2F7;
+        --text-sub: #8E8E93;
+        --border: rgba(255, 255, 255, 0.12);
+        --card-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+      }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", Pretendard, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+    .container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+      padding: 36px 28px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    .quote-text {
+      font-size: 21px;
+      line-height: 1.75;
+      font-weight: 500;
+      white-space: pre-wrap;
+      word-break: keep-all;
+      margin-bottom: 24px;
+      color: var(--text-main);
+    }
+    .author-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+    .font-badge {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 6px 14px;
+      border-radius: 12px;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      border: none;
+      width: 100%;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+    }
+    .btn-primary:hover { background-color: var(--primary-hover); }
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      background: rgba(0, 0, 0, 0.85);
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header-logo">
+      <span>🌿 Fontopia</span>
+    </div>
+
+    <div class="card">
+      <div id="quoteDisplay" class="quote-text">문장을 불러오는 중입니다...</div>
+      <div id="authorDisplay" class="author-text"></div>
+      <div id="fontBadge" class="font-badge" style="display:none;"></div>
+    </div>
+
+    <div class="actions" id="actionContainer">
+      <!-- Dynamic Buttons rendered via JS based on Device/OS -->
+    </div>
+  </div>
+
+  <div id="toast" class="toast">링크가 클립보드에 복사되었습니다!</div>
+
+  <script>
+    // 1. URL 파라미터 파싱
+    const params = new URLSearchParams(window.location.search);
+    const quoteText = params.get('q') || '별 하나에 추억과\n별 하나에 사랑과\n별 하나에 어머니, 어머니.';
+    const author = params.get('a') || '윤동주';
+    const work = params.get('w') || '하늘과 바람과 별과 시';
+    const fontFamily = params.get('f') || 'MaruBuri-Regular';
+    const fontDisplayName = params.get('fd') || '마루 부리';
+
+    // 2. DOM 반영
+    const quoteEl = document.getElementById('quoteDisplay');
+    const authorEl = document.getElementById('authorDisplay');
+    const fontBadgeEl = document.getElementById('fontBadge');
+
+    quoteEl.textContent = quoteText;
+    authorEl.textContent = work ? `— ${author}, 《${work}》` : `— ${author}`;
+    if (fontDisplayName) {
+      fontBadgeEl.textContent = `Font: ${fontDisplayName}`;
+      fontBadgeEl.style.display = 'inline-block';
+    }
+
+    // 3. 서체 동적 적용
+    if (fontFamily && fontFamily !== 'System') {
+      const fontUrlMap = {
+        'MaruBuri-Regular': 'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff',
+        'Pretendard-Regular': 'https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff',
+        'RIDIBatang': 'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff',
+        'GowunBatang-Regular': 'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff'
+      };
+      if (fontUrlMap[fontFamily]) {
+        const fontFace = new FontFace(fontFamily, `url(${fontUrlMap[fontFamily]})`);
+        fontFace.load().then(loaded => {
+          document.fonts.add(loaded);
+          quoteEl.style.fontFamily = `"${fontFamily}", serif`;
+        }).catch(e => console.warn('Font load failed:', e));
+      }
+    }
+
+    // 4. 접속 OS 감지 및 맞춤형 CTA 버튼 렌더링
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isDesktop = !/Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+    const isAndroid = /Android/i.test(ua);
+
+    const actionContainer = document.getElementById('actionContainer');
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function copyCurrentUrl() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        showToast('링크가 복사되었습니다!');
+      });
+    }
+
+    function shareCurrentUrl() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Fontopia — 오늘의 문장',
+          text: `${quoteText}\n${authorEl.textContent}`,
+          url: window.location.href,
+        }).catch(() => {});
+      } else {
+        copyCurrentUrl();
+      }
+    }
+
+    if (isIOS) {
+      // iOS / iPadOS -> Apple App Store & App Clip 유도
+      actionContainer.innerHTML = `
+        <a href="https://apps.apple.com/app/id6499271248" class="btn btn-primary" target="_blank">
+          <span> App Store에서 무료 다운로드</span>
+        </a>
+        <button class="btn btn-secondary" onclick="shareCurrentUrl()">
+          <span>친구에게 이 글귀 공유하기</span>
+        </button>
+      `;
+    } else if (isDesktop) {
+      // Desktop PC -> Chrome 웹스토어 확장 유도
+      actionContainer.innerHTML = `
+        <a href="https://chromewebstore.google.com/detail/fontopia/epoajlmjegpciheklmchdipeckmdibnb" class="btn btn-primary" target="_blank">
+          <span>🌐 Chrome 웹스토어에서 확장 추가 (무료)</span>
+        </a>
+        <button class="btn btn-secondary" onclick="copyCurrentUrl()">
+          <span>링크 복사하기</span>
+        </button>
+      `;
+    } else {
+      // Android 등 기타 모바일 -> 웹 뷰어 감상 & 복사
+      actionContainer.innerHTML = `
+        <button class="btn btn-primary" onclick="copyCurrentUrl()">
+          <span>🔗 링크 복사하기</span>
+        </button>
+        <button class="btn btn-secondary" onclick="shareCurrentUrl()">
+          <span>친구에게 공유하기</span>
+        </button>
+      `;
+    }
+  </script>
+</body>
+</html>
